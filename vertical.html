@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="design.css">
+    <title> PhASLA Horizontal Kinematics</title>
+</head>
+
+<body class="web">
+    <!-- Main -->
+    <section id="main" class="main">
+        <nav>
+            <!-- Logo -->
+            <a href="./index.html"><img class="logo3" src="./assets/logo1.png"></a>
+            <div>
+                <ul>
+                    <!-- Menu buttons -->
+                    <a href="./index.html#abt"><img id="icon4" src="./assets/about1.png"></a>
+                    <a href="./index.html#topics"><img id="icon4" src="./assets/topics1.png"></a>
+                    <a href="./index.html"><img id="icon4" src="./assets/home1.png"></a>
+                </ul>
+            </div>
+        </nav>
+
+        <div>
+            <h1 class="t2">VERTICAL KINEMATICS</h1>
+            <div>
+                <!-- Difficulty options -->
+                <p class="p2">SELECT<br>DIFFICULTY</p>
+                <div class="buttons2">
+                    <input type="button" id="button1" value="Elementary" class="btn3" name="bt1" onclick="begin(1)">
+                    <input type="button" id="button2" value="High School" class="btn3" name="bt2" onclick="begin(2)">
+                    <input type="button" id="button3" value="College" class="btn3" name="bt3" onclick="begin(3)">
+                </div>
+
+                <div class="end">
+                    <!-- End session button -->
+                    <input type="button" id="btn7" value="End Session" class="btn7" name="endbt" onclick="endsession()">
+                </div>
+
+
+                <!-- Question -->
+                <div class="q-col">
+                    <div class="container">
+                        <h3 class="quest">
+                            <!-- Place to insert question -->
+                            <label id="text"></label>
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <form class="an" onsubmit="check(); return false;">
+                    <div class="btn5">
+                        <!-- Input number -->
+                        Value:
+                        <input type="text" id="nums" name="num" class="slt" oninput="validate(this)">
+                    </div>
+
+                    <div class="btn5">
+                        <!-- Input unit -->
+                        Unit:
+                        <select name="unit" id="slt" class="slt">
+                            <!-- TO EDIT PER TOPIC -->
+                            <option value="blank"></option>
+                            <option value="no">no unit</option>
+                            <option value="m/s">m/s</option>
+                            <option value="m/s2">m/s2</option>
+                            <option value="m">m</option>
+                            <option value="N">N</option>
+                            <option value="s">s</option>
+                        </select>
+                    </div>
+
+                    <div class="bot">
+                        <!-- Submit button -->
+                        <input type="submit" id="sub" value="SUBMIT" class="btn4" name="sub" disabled>
+                    </div>
+                </form>
+                <div class="bot">
+                    <!-- Next and show solution buttons -->
+                    <input type="button" id="next" value="NEXT" class="btn6" name="sub" onclick="gen(0)" disabled>
+                    <input type="button" id="shw" value="SHOW SOLUTION" class="btn4" name="show"
+                        onclick="showtextsol()">
+                </div>
+
+                <div class="sol" id="sol">
+                    <!-- Place to insert correct answer -->
+                    <label id="textsol"></label>
+
+                    <!-- Solutions -->
+                    <label id="elem1"><br>Divide the distance traveled (d) over the time elapsed (t) travelling:
+                        $$answer = {d \over t}$$</label>
+                    <label id="elem2"><br>Divide the change in velocity (&#916;v) over the time elapsed (t) travelling:
+                        $$answer = {\Delta v \over t} = {(v_f - v_i) \over t}$$</label>
+                    <label id="elem3"><br>Use the following equation to solve the question above: $$d = {v_it + {at^2
+                        \over 2}}$$<br> <i>d</i> is distance, <i>t</i> is time, <i>v<sub>i</sub></i> is initial
+                        velocity, and <i>a</i> is acceleration.</label>
+                    <label id="elem4"><br>Use the following equation to solve the question above: $$d - d_i = {v_it +
+                        {at^2 \over 2}}$$<br> <i>d</i> is the distance at t = 2s, <i>d<sub>i</sub></i> is the distance
+                        at t = 0s <i>t</i> is time, <i>v<sub>i</sub></i> is initial velocity, and <i>a</i> is
+                        acceleration.</label>
+
+                    <label id="hs1"><br>Use the following equation to solve the question above: $$v_f^2 = {v_i^2 +
+                        2ad}$$<br> <i>d</i> is distance, <i>v<sub>f</sub></i> is final velocity, <i>v<sub>i</sub></i> is
+                        initial velocity, and <i>a</i> is acceleration.<br>In this case, the initial velocity is
+                        implicitly given: <i>v<sub>i</sub></i> = 0 m/s.</label>
+                    <label id="hs2"><br>Use the following equation to solve the question above: $$v_f^2 = {v_i^2 +
+                        2ad}$$<br> <i>d</i> is distance, <i>v<sub>f</sub></i> is final velocity, <i>v<sub>i</sub></i> is
+                        initial velocity, and <i>a</i> is acceleration.<br>Derive the equation for acceleration given
+                        this formula.</label>
+                    <label id="hs3"><br>Use the provided equation to find the distance traveled at 2.0 seconds (let this
+                        be x<sub>1</sub>) and then the distance traveled at 4.0 seconds (let this be x<sub>2</sub>).
+                        Then, get the answer by solving for the average of x<sub>1</sub> and x<sub>2</sub>.</label>
+                    <label id="hs4"><br>Use the following equation to solve the question above: $$d = {{(v_i + v_f)
+                        \over 2}*t}$$<br> <i>d</i> is distance, <i>t</i> is time, <i>v<sub>f</sub></i> is final
+                        velocity, and <i>v<sub>i</sub></i> is initial velocity.</label>
+
+                    <label id="coll1"><br>Let a<sub>A</sub> be the acceleration of cycle A and a<sub>B</sub> be the
+                        acceleration of cycle B. Use the fact that their acceleration can be caculated by: $$v_{fA} =
+                        {v_i + a_At} \qquad v_{fB} ={_i + a_Bt}$$ Since, both have the same velocity after 4.0 s,
+                        v<sub>fA</sub> = v<sub>fB</sub>: $${v_{oA} + a_At} = {v_{oB} + a_Bt}$$Thus, solving for the
+                        difference in speeds: $${\Delta v} = {v_{oA} - v_{oB}} = {a_Bt + a_At} = {(a_B - a_A)t}$$This
+                        equation assumes that a<sub>A</sub> > a<sub>B</sub>.</label>
+                    <label id="coll2"><br>First, calculate the net force acting on the boat: $$F_{net} = {F_1 + F_2 +
+                        F_3} \quad \text{Note: the concept of vectors still apply in this question.}$$Then, derive the
+                        equation for acceleration using the following formula to calculate the answer: $$F_{net} =
+                        {ma}$$</label>
+                    <label id="coll3"><br>First, consider the forces acting on the object when facing east (first case)
+                        and facing opposite direction (second case): $${F_A + F_B} = {ma_{east}} \; \text{(first case)}
+                        \qquad {F_A - F_B} = {ma_{opposite}} \; \text{(second case)}$$Adding the two equations:$${2F_A}
+                        = {m(a_{east}+a_{opposite})} \; \text{&#8756;} \;{F_A} = {{m(a_{east}+a_{opposite})} \over
+                        2}$$Then, use the equation above to calculate the answer. Let a<sub>east</sub> be the object's
+                        acceleration during the first case and a<sub>opposite</sub> during the second case.</label>
+                    <label id="coll4"><br>Use the provided equation to find the displacement traveled between the first
+                        (let this be x<sub>1</sub>) second second (let this be x<sub>2</sub>). Then, find the difference
+                        of x<sub>1</sub> and x<sub>2</sub> (i.e., &#916;x) to calculate the answer: $${\Delta x} = {x_2
+                        - x_1}$$</label>
+                </div>
+    </section>
+
+    <!--Footer-->
+    <section class="footer">
+        <a href="https://github.com/ketpadilla/MGT03-website" target="_blank" class="link"><img class="iconf"
+                src="./assets/Github logo.png"></a>
+    </section>
+
+    <!-- Algorithm -->
+    <script>
+        //TO EDIT PER TOPIC(PAGE)
+        // min and max to change depending on difficulty
+        var min = [
+            [1, 11, 3, 5],
+            [25, 8, 15, 15],
+            [10, 30, 7, 2],
+        ];
+        var max = [
+            [70, 87, 12, 30],
+            [100, 25, 65, 40],
+            [50, 3000, 70, 250],
+        ];
+
+        // set number of values used per question    
+        let valuesmax = 4;
+        var num = new Array(valuesmax);
+
+        // set variable to be used to change questions
+        let index = 0;
+
+        // variable to determine chosen difficultywith retrospect to relevant arrays
+        let dif = 0;
+
+        // variables to store question text and function to print such
+        function qprint(value) {
+            let quest = [
+                [`What is the speed of an object that travels ${num[0]} meters in ${num[1]} seconds?`, `A car can accelerate from 0 to ${num[0]} m/s in a time of ${num[1]} seconds. Determine the acceleration of this car.`, `Win Blonehare and Kent Swimtashore are sailboating in Lake Gustastorm. Starting from rest near the shore, they accelerate with a uniform acceleration of ${num[0]} m/s<sup>2</sup>, How far are they from the shore after ${num[1]} seconds?`, `A cart is at x = ${num[0]} m at time t = 0. The cart accelerates at ${num[1]} m/s<sup>2</sup>. If the speed of the cart at t = 0 is ${num[2]} m/s, find the position of the cart at t = 2 s.`],
+                [`A Cessna 150 airplane has a takeoff speed of ${num[0]} m/s. Determine the minimum length of the runway which would be required for the plane to take off if it averages an acceleration of ${num[1]} m/s<sup>2</sup>.`, `A bike accelerates uniformly from rest to a speed of ${num[0]} m/s over a distance of ${num[1]} m. Determine the acceleration of the bike.`, `A car is traveling along a road. it moves according to the following equation: x = ${num[0]}t<sup>2</sup> + ${num[1]}t<sup>3</sup> (x is in meter and t is in seconds). What is the average velocity of the car between 2.0 and 4.0 seconds?`, `A car traveling at ${num[0]} m/s skids to a stop in ${num[1]} s. Determine the skidding distance of the car (assume uniform acceleration).`],
+                [`Two motorcycles are traveling due east with different velocities. However, four seconds later, they have the same velocity. During this four-second interval, cycle A has an average acceleration of ${num[0]} m/s<sup>2</sup> due east, while cycle B has an average acceleration of ${num[1]} due east. By how much did the speeds <i>differ</i> at the beginning of the four-second interval?`, `A boat has a mass of ${num[0]} kg. Its engines generate a drive force of ${num[1]} N, due west, while the wind exerts a force of ${num[2]} N, due east, and the water exerts a resistive force of ${num[3]} N due east. What is the magnitude of the boat's acceleration? `, `Two forces FA and FB are applied to an object whose mass is ${num[0]} kg. The larger force is FA. When both forces point due east, the object's acceleration has a magnitude of ${num[1]} m/s<sup>2</sup>. However, when FA points due east and FB points due west, the acceleration is ${num[2]} m/s<sup>2</sup>, due east. Find the magnitude of FA. `, `A car is moving along the x-axis of a coordinate system according to the following equation: x = ${num[0]} + ${num[1]}t<sup>2</sup> (x is in meter and t is in seconds). Find the displacement fo the car between the first and second second.`],
+            ];
+
+            if (value != 0) { value-- }
+            document.getElementById('text').innerHTML = quest[value][index];
+            dif = value;
+        };
+
+        // store unit of answer per question
+        const units = [
+            ['m/s', 'm/s2', 'm', 'm'],
+            ['m', 'm/s2', 'm/s', 'm'],
+            ['m/s', 'm/s2', 'N', 'm'],
+        ];
+
+        // functions for equations used to solve each question
+        function anss() {
+            // determine selected difficulty
+            if (dif == 0) {
+                // determine current question
+                if (index == 1) { answ = num[0] / num[1]; }
+                if (index == 2) { answ = num[0] / num[1]; }
+                if (index == 3) { answ = (num[0] * (num[1] ** 2)) / 2 }
+                if (index == 4) { answ = num[0] + (2 * num[1]) + (num[2] * 4 * 0.5) }
+            }
+            // same logic above applies to the proceeding syntax
+            else if (dif == 1) {
+                //ADD OTHER EQUATIONS
+                if (index == 1) { answ = (num[0] ** 2) / (num[1] * 2) };
+                if (index == 2) { answ = (num[0] ** 2) / (2 * num[1]) };
+                if (index == 3) { answ = ((16 * num[0]) + (64 * num[1])) - ((4 * num[0]) + (8 * num[1])) / 2 };
+                if (index == 4) { answ = (num[0] / 2) * num[1] };
+            }
+            else if (dif == 2) {
+                if (index == 1) { answ = Math.abs((num[0] - num[1])) * 4 };
+                if (index == 2) { answ = (-num[1] + num[2] + num[3]) / num[0] };
+                if (index == 3) { answ = (num[0] * (num[1] + num[2])) / 2 }
+                if (index == 4) { answ = num[0] + (num[1] * 4) - (num[0] + num[1]) };
+            }
+            // round answer to two decimal places if necessary
+            answ = Math.round((answ + Number.EPSILON) * 100) / 100;
+            return answ;
+        }
+
+
+        //DO NOT CHANGE
+        // show correct answer and solution
+        function showtextsol() {
+            // show correct answer
+            document.getElementById('textsol').innerHTML = `The answer is <i>${anss()} ${units[dif][index - 1]}</i>.`;
+            // hide all solutions
+            for (var i = 1; i <= 4; i++) {
+                document.getElementById("elem" + i).style.display = document.getElementById("hs" + i).style.display = document.getElementById("coll" + i).style.display = "none";
+            };
+            // show corresponding solution to current question
+            // for elementary difficulty
+            if (dif == 0) {
+                document.getElementById("elem" + index).style.display = "block";
+            };
+            // for high school difficulty
+            if (dif == 1) {
+                document.getElementById("hs" + index).style.display = "block";
+            };
+            // for college difficulty
+            if (dif == 2) {
+                document.getElementById("coll" + index).style.display = "block";
+            };
+        };
+
+        // variable for checking if difficulty button has been pressed
+        let start = 0;
+
+        // allow cycling through questions
+        function indcnt() {
+            if (index > 3) { index = 0; }
+        }
+
+        // generate given numbers
+        //add decimal generator??
+        function nums() {
+            for (var i = 0; i < valuesmax; i++) {
+                num[i] = [getRndInt(min[dif][index], max[dif][index])];
+                num[i] = Number(num[i]);
+            }
+        };
+        function getRndInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+
+        // variable for saving the initially selected difficulty
+        let stat = 0;
+
+        // generate next question
+        function gen(value) {
+            // change difficulty
+            change(value);
+            // check what button trigger this function; if the difficulty button was used, stop function if "start" is not 0; if not, increase "start" by one and continue
+            if (value != 0) { if (start != 0) { return } stat = value; start++; alert("Round answers to two decimal places if necessary"); };
+            if (value == 0) { value = stat; }
+            // check/reset index, generate given numbers, print question, increase index value and revert button styles and states
+            indcnt(); nums(); qprint(value); index++; resbtn();
+        }
+
+        // change difficulty
+        let diff = 0;
+        function change(value) {
+            // return if next button (= 0) was pressed
+            if (value == 0) { return 0; }
+            // if diff == 0, then the user just started answering; therefore, save the current difficulty option
+            if (diff == 0) { diff = value; }
+            // if the arguments below are true, then the user opts to change the difficulty option
+            if (diff != value && value != 0) {
+                let text = "Would you to change difficulty?";
+                if (confirm(text) == true) {
+                    // save the newly selected difficulty
+                    diff = value;
+                    // optional: brings users to always answer the first question when changing difficulties
+                    index = start = 0;
+                    // general new question
+                    gen(diff)
+                        ;
+                }
+            }
+        };
+
+        // revert button styles and states
+        function resbtn() {
+            nextbtn.disabled = true;
+            subbtn.disabled = false;
+            sol.style.display = "none";
+            forfeit = false;
+            sol.style.display = "none";
+            document.getElementById("nums").value = "";
+            document.getElementById("slt").value = "blank";
+        }
+
+        // store correct answer
+        // check answer
+        function check() {
+            //variables to use for checking
+            inpt1 = document.getElementById("nums").value;
+            inpt2 = document.getElementById("slt").value
+            // return if user submitted blank inputs
+            if (inpt1 == "") { alert("Input answer first"); return; };
+            if (inpt2 == "blank") { alert("Input unit first"); return; };
+            // enable next button
+            nextbtn.disabled = false;
+            // check answer
+            answ = anss();
+            // if value incorrect
+            if (answ != inpt1) { alert("Value Incorrect"); forfeit = false; total++; subbtn.disabled = true; return; };
+            // if unit incorrect
+            if (units[dif][index - 1] != inpt2) { alert("Unit Incorrect"); forfeit = false; return; }
+            // if correct
+            alert("Correct"); subbtn.disabled = true; forfeit = true; score++; total++; return;
+        };
+
+        // store "Show" button in a variable
+        var clickShow = document.getElementsByName("show")[0];
+        // store space for solution text inside a variable
+        var sol = document.getElementById("sol");
+        // variable to determine if user has forfeited the current question
+        forfeit = false;
+
+        // show answer
+        clickShow.addEventListener('click', function (event) {
+            // return if no difficulty option is selected
+            if (toggle != true) { alert("Select difficulty first"); return; };
+            // hide solution panel
+            if (sol.style.display != "none") { sol.style.display = "none"; return; };
+            // show solution panel if user has forfeited the current question
+            if (forfeit != false) { sol.style.display = "block"; return; };
+            // confirm if the user will forfeit the current question
+            let text = "Would you to forfeit this question and know the solution?.";
+            if (confirm(text) != true) { return; };
+            // do the following if the user forfeited the current question
+            sol.style.display = "block";
+            forfeit = true;
+            nextbtn.disabled = false;
+            subbtn.disabled = true;
+        });
+
+        // select difficulty
+        // for identifying buttons outside "begin" function
+        var nextbtn = document.getElementById("next");
+        var subbtn = document.getElementById("sub");
+        var btn1 = document.getElementById("button1");
+        var btn2 = document.getElementById("button2");
+        var btn3 = document.getElementById("button3");
+
+        // for button style and state changes
+        btn1.disabled = btn2.disabled = btn3.disabled = toggle = false;
+
+        // button style and state change depending on difficulty button pressed
+        function begin(value) {
+            // change "toggle" value from false to true
+            toggle = !toggle;
+            // loop thrice starting with i = 1, ending with i = 3
+            for (let i = 1; i <= 3; i++) {
+                // determine what button is pressed
+                if (i != value) {
+                    // do the following if button[i] was not pressed
+                    document.getElementById("button" + i).disabled = !document.getElementById("button" + i).disabled;
+                } else {
+                    // do the following if button[i] was pressed
+                    document.getElementById("button" + i).style.color = toggle ? "#20212A" : "#BEC0F1";
+                    document.getElementById("button" + i).style.background = toggle ? "#BEC0F1" : "";
+                }
+            } edsw(); gen(value);
+        }; //generate question based on difficulty
+
+        // limit input to two decimal places
+        function validate(e) {
+            var t = e.value;
+            e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+        };
+
+        // variables to check score
+        let score = 0;
+        let total = 0;
+
+        // variable for end session button
+        var edbtn = document.getElementById("btn7");
+        // show button
+        function edsw() { edbtn.style.display = "block" }
+        // end session
+        function endsession() {
+            // stay pressed
+            edbtn.style.cssText = "color: #ededed; background: transparent";
+            let text1 = "Are you finished answering?"
+            let text2 = "Go back to main page?"
+            // confirm if user is finished answering
+            if (confirm(text1) == true) {
+                // show score
+                alert("You got".concat(" ", score).concat(" of ", total));
+                // confirm if user will go back to main page
+                if (confirm(text2) == true) {
+                    // go back to topics section
+                    alert("Redirecting to main page");
+                    window.location.href = "./index.html#topics";
+                } else { location.reload() }
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+</body>
+
+</html>
